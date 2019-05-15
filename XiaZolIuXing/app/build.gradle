@@ -1,0 +1,104 @@
+apply plugin: 'com.android.application'
+//2.项目配置:添加插件
+apply plugin: 'org.greenrobot.greendao'
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.example.administrator.xiazoliuxing"
+        minSdkVersion 15
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "EveryWhereTrip_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                }
+            }
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "EveryWhereTrip_${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                }
+            }
+        }
+    }
+    productFlavors {
+        //渠道的渠道号
+        huawei {}
+    }
+
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [CHANNEL_VALUE: name]
+    }
+    //多维度打包或者叫版本差异化打包,这里用不到,名字自己定义就好
+    flavorDimensions "every"
+}
+// 获取当前系统时间
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+//4.初始化GreenDao配置
+greendao {
+    schemaVersion 1 //数据库版本号
+    daoPackage 'com.example.administrator.xiazoliuxing.dao'  //数据库全路径
+    targetGenDir 'src/main/java'  //存放位置
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:support-v4:28.0.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    //xrecyclerview布局依赖
+    implementation 'com.jcodecraeer:xrecyclerview:1.5.9'
+    //
+    implementation 'com.android.support:design:28.0.0'
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.4'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.5.0'
+    //retrofit 库
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    //转换器，请求结果转换成Model
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    //配合Rxjava 使用
+    implementation 'com.google.code.gson:gson:2.6.2'
+    //Gson 库
+    //解析图片依赖
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    implementation 'com.android.support:cardview-v7:28.0.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-14'
+    //没有使用特殊Header，可以不加这行
+    //EventBus
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    //ButterKnife依赖(添加Android ButterKnife Zelezny插件)
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    //3.项目配置:添加依赖
+    implementation 'org.greenrobot:greendao:3.2.2'
+    // add library
+    api 'com.just.agentweb:agentweb:4.0.3-alpha@aar'
+    // (必选)
+    implementation files('libs/umeng-analytics-8.0.2.jar')
+    implementation 'com.jaeger.statusbarutil:library:1.5.1'
+    //轮播图依赖
+    implementation 'com.youth.banner:banner:1.4.10'
+    //3.项目配置:添加依赖
+    implementation 'org.greenrobot:greendao:3.2.2' // add library
+
+}

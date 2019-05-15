@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".ui.main.activity.AmendActivity">
+<LinearLayout
+    android:id="@+id/lv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/c_fefefe">
+
+        <TextView
+            android:id="@+id/tesc"
+            android:layout_marginTop="@dimen/dp_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dp_10"
+            android:text="修改信息"
+            android:textColor="@color/c_333333" />
+
+    </android.support.v7.widget.Toolbar>
+
+</LinearLayout>
+
+
+    <EditText
+        android:gravity="top|left"
+        android:maxLength="27"
+        android:id="@+id/edit"
+        android:layout_margin="@dimen/dp_10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/lv"
+        android:background="@drawable/shap"
+        />
+    <TextView
+        android:layout_marginLeft="@dimen/dp_300"
+        android:layout_marginTop="@dimen/dp_160"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="27/27"
+        />
+</RelativeLayout>
